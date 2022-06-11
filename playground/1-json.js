@@ -6,12 +6,12 @@ const fs = require('fs');
 //     author: "Ryan Holiday"
 // }
 
-//JSON to string
+//it converts the javascript object to json-string
 // const bookJSON = JSON.stringify(book);
 // fs.writeFileSync('jsondata.json', bookJSON)
 // console.log(bookJSON);
 
-//string to JSON
+//json-string to javascriptobject
 // const parseData = JSON.parse(bookJSON);
 // console.log(parseData.author);
 

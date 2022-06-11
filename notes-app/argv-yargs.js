@@ -1,5 +1,19 @@
-const notes = require('./notes.js');
+
+const validator = require('validator');
+const chalk = require("chalk");
 const yargs = require("yargs");
+const msg = require("./notes.js");
+
+
+// const command = process.argv[2];
+//console.log(process.argv);
+// if(command === 'add'){
+//     console.log('adding notes!');
+// }
+// else if(command === "remove"){
+//     console.log("removing the notes!");
+// }
+
 
 //customize yargs version
 yargs.version('1.1.0');
@@ -20,7 +34,8 @@ yargs.command({
         }
     },
     handler: function(argv){
-        notes.addNote(argv.title,argv.body)
+        console.log("title: ", argv.title);
+        console.log("body: ",argv.body);
     }
 });
 
@@ -47,3 +62,20 @@ yargs.command({
 })
 
 yargs.parse();
+//console.log(yargs.argv);
+
+
+
+
+
+// const a = msg("get Notes");
+// console.log(a);
+
+// console.log(validator.isURL('https://www3schools.com'));
+
+// const sus = chalk.bgRed.green.bold('success')
+// console.log(sus );
+// const add = require("./utils.js");
+// const sum = add(7,3);
+// console.log(sum);
+
