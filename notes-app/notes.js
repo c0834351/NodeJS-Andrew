@@ -4,13 +4,14 @@
 //     return a;}
 // module.exports = msg;
 const fs = require('fs');
-const { title } = require('process');
+const chalk  = require("chalk");
 
 const getNotes = function () {
     return "your notes";
 }
 
-const addNote = function (title, body) {
+//adding notes method
+const addNote = function(title, body) {
     const notes = loadNotes();
     const duplicateNotes = notes.filter(function(note){
         return note.title === title;
@@ -20,23 +21,40 @@ const addNote = function (title, body) {
             title: title,
             body: body
         });
+        
         saveNotes(notes);
-        console.log("New Notes added!");
+        console.log(chalk.green.inverse("New Notes added!"));
     }
     else{
-        console.log("Have duplicate title");
+        console.log(chalk.red.inverse("Have duplicate title"));
     }
     
 }
+//remove notes method
+const removeNote = function(title){
+    const notes = loadNotes();
+    const notesToKeep = notes.filter(function(note){
+       return note.title !== title
+    })
+    if(notes.length > notesToKeep.length){
+        console.log(chalk.green.inverse('NOTES REMOVED'));
+        saveNotes(notesToKeep);
+    }
+    else {
+        console.log(chalk.red.inverse('NOTES NOT REMOVED'));
+    }
+   
+}
+
 
 const saveNotes = function(notes){
     const dataJSON = JSON.stringify(notes);
-    fs.writeFileSync('notes.json', dataJSON, {flag: "a"});
+    fs.writeFileSync('notes.json', dataJSON );
 }
 
-const loadNotes = function () {
+const loadNotes = function() {
     try {
-        const dataBuffer = fs.readFileSync('notes.js');
+        const dataBuffer = fs.readFileSync('notes.json');
         const dataJSON = dataBuffer.toString();
         return JSON.parse(dataJSON);
     }catch(e){
@@ -44,7 +62,9 @@ const loadNotes = function () {
     }
 }
 
+
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 }
