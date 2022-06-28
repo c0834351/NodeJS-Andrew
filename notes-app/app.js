@@ -3,7 +3,8 @@ const yargs = require("yargs");
 
 //customize yargs version
 yargs.version('1.1.0');
-//add,remove,read,list
+
+//ADDING NOTES
 yargs.command({
     command : 'add',
     describe: 'add a new notes',
@@ -19,12 +20,16 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv){
+    // handler: function(argv){
+    //     notes.addNote(argv.title,argv.body)
+    // }
+    //short-form syntax
+    handler(argv){
         notes.addNote(argv.title,argv.body)
     }
 });
 
-//REMOVE
+//REMOVING NOTES
 yargs.command({
     command : 'remove',
     describe: 'remove a new notes',
@@ -35,22 +40,40 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function(argv){
+    // handler: function(argv){
+    //     notes.removeNote(argv.title)
+    // }
+    handler(argv){
         notes.removeNote(argv.title)
     }
 });
+//LISTING NOTES
 yargs.command({
     command : 'list',
     describe: 'list a notes',
-    handler: function(){
-        console.log("listing out all note!");
+    // handler: function(){
+    //     console.log("listing out all note!");
+    // }
+    handler(){
+        notes.allNotes();
     }
 });
+//READING NOTES
 yargs.command({
     command : 'read',
     describe: 'read a notes',
-    handler: function(){
-        console.log("reading a note!");
+    builder: {
+        title: {
+            describe: 'note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    // handler: function(){
+    //     console.log("reading a note!");
+    // }
+    handler(argv){
+        notes.readNotes(argv.title);
     }
 })
 
