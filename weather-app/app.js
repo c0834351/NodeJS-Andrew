@@ -34,20 +34,31 @@ const forecast = require('./utils/weather')
 //     }
 // })
 
+//to take country name from console
+const country = process.argv[2];
 
-// Geocode callback function
-geocode('Washington DC', (error, data) =>{
-    console.log('Error: '+ error);
-    // console.log('Data: ' + data.latitude);
-    // console.log('Data: ' + data.longitude);
-    // console.log('Data: ' + data.name);
+if(!country){
+    console.log('please enter the country name');
+}
+else{
+    // Geocode callback function
+geocode('country', (error, data) =>{
+    if(error){
+        return console.log(error);
+    }
+    forecast(data.country, (error, forecastData) => {
+        if(error){
+            return console.log(error);
+        }
+        console.log(data.name);
+        console.log('data: ', forecastData)
+       
+        
+      })
 })
-geocode('Ontario', (error, data) =>{
-    console.log('Error: '+ error);
-    // console.log('Data: ' + data.latitude);
-    // console.log('Data: ' + data.longitude);
-    // console.log('Data: ' + data.name);
-})
+}
+
+
 
 
 //Exercise: Forecast
@@ -60,9 +71,9 @@ geocode('Ontario', (error, data) =>{
 //    - Coordinate error, pass string for error
 //    - Success, pass forecast string for data (same format as from before)
 
-forecast('New York', (error, data) => {
-    console.log('Error', error)
-    console.log('country: ', data)
+// forecast('New York', (error, data) => {
+//     console.log('Error', error)
+//     console.log('country: ', data)
    
     
-  })
+//   })
