@@ -7,3 +7,14 @@ request({url: url, json: true}, (error,response) => {
     console.log("It is currently : " +response.body.current.temperature + " out. But feels like : " +response.body.current.feelslike + " out");
     console.log("curently it is: " + response.body.current.weather_descriptions[0]);
 })
+
+
+//*******************GEOCODING***********************
+
+const geocodingURL = 'http://api.positionstack.com/v1/forward?access_key=6fff9674b9424e67ed143d775b5cc8d9&query=1600%20Pennsylvania%20Ave%20NW,%20Washington%20DC';
+
+request({url: geocodingURL, json: true}, (error,response) => {
+    console.log("lattitude is: " + response.body.data[0].latitude);
+    console.log("longitude is: " + response.body.data[0].longitude);
+})
+
