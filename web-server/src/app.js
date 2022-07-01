@@ -1,20 +1,24 @@
 const express = require('express')
+const path = require('path')
+
+//console.log(path.join(__dirname, '../public')); 
+//console.log(__filename); //This gives the current file name i.e, app.js
+//console.log(__dirname); //This gives the current directory name i.e, src
 
 const app = express()
+const publicDirectoryPath = path.join(__dirname, '../public');
+app.use(express.static(publicDirectoryPath))
 
-//app.com
-//app.com/help
-//app.com/about
-
-app.get('', (req,res)=> {
-    res.send('<h1>Hello! This is Weather app!</h1>')
-})
-app.get('/help', (req,res)=> {
-    res.send('Help Page!');
-})
-app.get('/about', (req,res)=> {
-    res.send('About Page!');
-})
+//This code is no use as we set up index.html, help.html, about.html
+// app.get('', (req,res)=> {
+//     res.send('<h1>Hello! This is Weather app!</h1>')
+// })
+// app.get('/help', (req,res)=> {
+//     res.send('Help Page!');
+// })
+// app.get('/about', (req,res)=> {
+//     res.send('About Page!');
+// })
 app.get('/weather',(req,res)=>{
     res.send(
      [{provience: 'Ontario',temperature: 30},{provience: 'Quebec', temperature: 25}])
