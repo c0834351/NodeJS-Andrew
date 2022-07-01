@@ -42,20 +42,35 @@ if(!country){
 }
 else{
     // Geocode callback function
-geocode('country', (error, data) =>{
+// geocode(country, (error, data) =>{
+//     if(error){
+//         return console.log(error);
+//     }
+//     forecast(data.country, (error, forecastData) => {
+//         if(error){
+//             return console.log(error);
+//         }
+//         console.log(data.name);
+//         console.log('data: ', forecastData)
+//       })
+// })
+
+//converting the code using destructuring
+geocode(country, (error, {name } = {}) =>{
     if(error){
         return console.log(error);
     }
-    forecast(data.country, (error, forecastData) => {
+    forecast(name, (error, forecastData) => {
         if(error){
             return console.log(error);
         }
-        console.log(data.name);
+        console.log( name);
         console.log('data: ', forecastData)
        
         
       })
 })
+
 }
 
 
