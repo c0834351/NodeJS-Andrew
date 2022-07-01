@@ -6,7 +6,17 @@ const path = require('path')
 //console.log(__dirname); //This gives the current directory name i.e, src
 
 const app = express()
+//define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public');
+
+//customizing the views directory
+const viewsPath = path.join(__dirname, '../template');
+app.set('views',viewsPath)
+
+//setting handle bars (hbs) in express
+app.set('view engine','hbs')
+
+//set up static directory to serve
 app.use(express.static(publicDirectoryPath))
 
 //This code is no use as we set up index.html, help.html, about.html
@@ -20,10 +30,11 @@ app.use(express.static(publicDirectoryPath))
 //     res.send('About Page!');
 // })
 
-//setting handle bars (hbs) in express
-app.set('view engine','hbs')
 
-//
+
+
+
+//dynamic pages
 app.get('/index',(req,res)=>{
     res.render('index', {
      title: 'weather',
