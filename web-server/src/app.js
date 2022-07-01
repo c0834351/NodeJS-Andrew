@@ -19,10 +19,36 @@ app.use(express.static(publicDirectoryPath))
 // app.get('/about', (req,res)=> {
 //     res.send('About Page!');
 // })
-app.get('/weather',(req,res)=>{
-    res.send(
-     [{provience: 'Ontario',temperature: 30},{provience: 'Quebec', temperature: 25}])
+
+//setting handle bars (hbs) in express
+app.set('view engine','hbs')
+
+//
+app.get('/index',(req,res)=>{
+    res.render('index', {
+     title: 'weather',
+     name: 'snehitha'
+    })
 })
+app.get('/about',(req,res)=>{
+    res.render('about', {
+     title: 'About page',
+     name: 'snehitha'
+    })
+})
+
+app.get('/help',(req,res)=>{
+    res.render('help', {
+        title: 'Help',
+        message: 'Send mails'
+    })
+})
+
+
+// app.get('/weather',(req,res)=>{
+//     res.send(
+//      [{provience: 'Ontario',temperature: 30},{provience: 'Quebec', temperature: 25}])
+// })
 
 app.listen(3000,()=>{
     console.log('server is on port 3000');
