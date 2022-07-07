@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const hbs = require('hbs')
 
 //console.log(path.join(__dirname, '../public')); 
 //console.log(__filename); //This gives the current file name i.e, app.js
@@ -8,13 +9,14 @@ const path = require('path')
 const app = express()
 //define paths for express config
 const publicDirectoryPath = path.join(__dirname, '../public');
-
 //customizing the views directory
-const viewsPath = path.join(__dirname, '../template');
-app.set('views',viewsPath)
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 
-//setting handle bars (hbs) in express
+//setting handle bars (hbs) in express and views
 app.set('view engine','hbs')
+app.set('views',viewsPath)
+hbs.registerPartials(partialsPath)
 
 //set up static directory to serve
 app.use(express.static(publicDirectoryPath))
@@ -51,7 +53,8 @@ app.get('/about',(req,res)=>{
 app.get('/help',(req,res)=>{
     res.render('help', {
         title: 'Help',
-        message: 'Send mails'
+        message: 'Contact us to get HELP!',
+        name: 'snehitha'
     })
 })
 
