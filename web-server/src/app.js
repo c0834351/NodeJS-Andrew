@@ -14,8 +14,8 @@ const viewsPath = path.join(__dirname, '../templates/views');
 const partialsPath = path.join(__dirname, '../templates/partials');
 
 //setting handle bars (hbs) in express and views
-app.set('view engine','hbs')
-app.set('views',viewsPath)
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
 //set up static directory to serve
@@ -37,36 +37,64 @@ app.use(express.static(publicDirectoryPath))
 
 
 //dynamic pages
-app.get('/index',(req,res)=>{
+app.get('/index', (req, res) => {
     res.render('index', {
-     title: 'weather',
-     name: 'snehitha'
+        title: 'weather',
+        message: 'Use this app to get details about weather!',
+        name: 'snehitha'
     })
 })
-app.get('/about',(req,res)=>{
+app.get('/about', (req, res) => {
     res.render('about', {
-     title: 'About page',
-     name: 'snehitha'
+        title: 'About page',
+        message: 'Regarding the weather app!',
+        name: 'snehitha'
     })
 })
-app.get('/help',(req,res)=>{
+app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
         message: 'Contact us to get HELP!',
         name: 'snehitha'
     })
 })
+app.get('/products', (req, res) => {
 
-app.get('/help/*',(req,res)=>{
-    res.render('error404',{
+    if (!req.query.search) {
+        res.send('You mush provide a search term')
+    }
+    else {
+        console.log(req.query.search);
+        res.send({
+            product: 'milk'
+        })
+    }
+
+})
+app.get('/weather', (req, res) => {
+
+    if (!req.query.provience) {
+        return res.send({
+            error: 'Please provide provience'
+        })
+    }
+    res.send(
+        { 
+            provience: 'Ontario', 
+            temperature: 30,
+            address: req.query.provience })
+})
+
+app.get('/help/*', (req, res) => {
+    res.render('error404', {
         title: '404',
         errorMessage: 'Help article not found',
         name: 'snehitha'
     })
 })
 
-app.get('*',(req,res) =>{
-    res.render('error404',{
+app.get('*', (req, res) => {
+    res.render('error404', {
         title: '404',
         errorMessage: '404 Page Not Found',
         name: 'snehitha'
@@ -80,6 +108,6 @@ app.get('*',(req,res) =>{
 //      [{provience: 'Ontario',temperature: 30},{provience: 'Quebec', temperature: 25}])
 // })
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log('server is on port 3000');
 })
