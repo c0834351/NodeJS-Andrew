@@ -49,7 +49,6 @@ app.get('/about',(req,res)=>{
      name: 'snehitha'
     })
 })
-
 app.get('/help',(req,res)=>{
     res.render('help', {
         title: 'Help',
@@ -57,6 +56,23 @@ app.get('/help',(req,res)=>{
         name: 'snehitha'
     })
 })
+
+app.get('/help/*',(req,res)=>{
+    res.render('error404',{
+        title: '404',
+        errorMessage: 'Help article not found',
+        name: 'snehitha'
+    })
+})
+
+app.get('*',(req,res) =>{
+    res.render('error404',{
+        title: '404',
+        errorMessage: '404 Page Not Found',
+        name: 'snehitha'
+    })
+})
+
 
 
 // app.get('/weather',(req,res)=>{
