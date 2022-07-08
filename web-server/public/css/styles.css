@@ -31,7 +31,24 @@ footer{
     padding: 5px;
    
 }
-
+form{
+    padding-top: 12px;
+}
+input{
+    border: 1px solid lightslategray;
+    padding: 8px;
+}
+button{
+    color: lightslategray;
+    cursor: pointer;
+    background-color: lightgray;
+    padding: 5px;
+    margin-left: 8px;
+}
+button:hover{
+    background-color: darkgrey;
+    color: black;
+}
 h1{
     font-size: 50px
 }
