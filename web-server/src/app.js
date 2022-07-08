@@ -1,6 +1,10 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const request = require('request')
+const weather = require('./utils/weather')
+const geocode = require('./utils/geocode')
+const forecast = require('./utils/weather')
 
 //console.log(path.join(__dirname, '../public')); 
 //console.log(__filename); //This gives the current file name i.e, app.js
@@ -78,11 +82,26 @@ app.get('/weather', (req, res) => {
             error: 'Please provide provience'
         })
     }
-    res.send(
-        { 
-            provience: 'Ontario', 
-            temperature: 30,
-            address: req.query.provience })
+    geocode(req.query.provience, (error, { name} )=>{
+        if(error){
+           return res.send({ error })
+        }
+        forecast(name, (error, forecastData)=>{
+            if(error){
+               return res.send({ error })
+            }
+            res.send({
+                forecast: forecastData,
+                provience: req.query.provience
+            })
+        })
+    })
+
+    // res.send(
+    //     { 
+    //         provience: 'Ontario', 
+    //         temperature: 30,
+    //         address: req.query.provience })
 })
 
 app.get('/help/*', (req, res) => {
