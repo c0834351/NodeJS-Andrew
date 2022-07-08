@@ -82,7 +82,7 @@ app.get('/weather', (req, res) => {
             error: 'Please provide provience'
         })
     }
-    geocode(req.query.provience, (error, { name} )=>{
+    geocode(req.query.provience, (error, {name } = {} )=>{
         if(error){
            return res.send({ error })
         }

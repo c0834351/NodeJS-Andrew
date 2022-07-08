@@ -49,7 +49,7 @@ const product = {
 // transaction('order making', product)
 
 //destructing function arguments
-const transaction = (type, {label, quantity, price})=>{
+const transaction = (type, {label, quantity = 0, price} = {})=>{
     console.log(type);
     console.log(label,quantity,price);
 }
