@@ -29,3 +29,6 @@ all of which will end up covering in the class.
 So at a high level, you know what node is node as a way to run JavaScript code on the server as opposed
 
 to being forced to run it on the client in the browser?
+
+TO START MONGODB
+ brew services start mongodb-community
