@@ -35,17 +35,18 @@ router.get('/homework/:id',(req,res)=>{
 })
 
 //update using aync-await
-router.patch('/homework/:id', async (req,res)=>{
+router.patch('/homeworks/:id', async (req,res)=>{
     const updates = Object.keys(req.body)
     const allowedUpdates = ['subject','completed']
-    const isValidated = updates.every((update)=>{
-        allowedUpdates.includes(update)
-    })
+    const isValidated = updates.every((update)=>allowedUpdates.includes(update))
     if(!isValidated){
         return res.status(400).send("Invalid updates!")
     }
     try{
     const _id = req.params.id
+    // const homework = await Homework.findById(_id)
+    // updates.forEach((update)=> homework[update] = req.body[update])
+    // await homework.save()
         const homework = await Homework.findByIdAndUpdate(_id, req.body, {new: true, runValidators: true })
         if(!homework){
             return res.status(404).send('User not found')
